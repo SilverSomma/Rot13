@@ -10,11 +10,13 @@ public class Rot13Test {
     void Rot13() {
         String original = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         String encrypted = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-        assertEquals(encrypted, rot13.encrypt(original));
-        assertEquals("GreR!", rot13.encrypt("TerE!"));
+        assertEquals(encrypted, rot13.rot13(original));
+
         assertEquals("Guvf    grfg  ---- vffFF n YVGGYR ovvggg PEENNNNNMM   LLLLLLLLLLLllll!!!! VF vg jbEXVVVat?????????",
-                rot13.encrypt("This    test  ---- issSS a LITTLE biittt CRRAAAAAZZ   YYYYYYYYYYYyyyy!!!! IS it woRKIIIng?????????"));
+                rot13.rot13("This    test  ---- issSS a LITTLE biittt CRRAAAAAZZ   YYYYYYYYYYYyyyy!!!! IS it woRKIIIng?????????"));
 
-
+        assertEquals("GreR!", rot13.rot13("TerE!"));
+        assertEquals("TerE!", rot13.rot13("GreR!"));
     }
+
 }

@@ -10,19 +10,19 @@ public class Rot13 {
 
     public static void main(String[] args) {
         Rot13 rot13 = new Rot13();
-        rot13.encrypt("ABC");
+        rot13.rot13("ABC");
 
     }
 
-    public String encrypt(String original) {
+    public String rot13(String original) {
         char[] input = original.toCharArray();
         StringBuilder result = new StringBuilder();
 
         for (char character : input) {
             if (isUppercase(character)) {
-                result.append(encodeCharacter((int) character, UPPER_CASE_UPPER_VALUE));
+                result.append(rot13Character(character, UPPER_CASE_UPPER_VALUE));
             } else if (isLowercase(character)) {
-                result.append(encodeCharacter((int) character, LOWER_CASE_UPPER_VALUE));
+                result.append(rot13Character(character, LOWER_CASE_UPPER_VALUE));
             } else {
                 result.append(character);
             }
@@ -46,7 +46,7 @@ public class Rot13 {
         }
     }
 
-    private static char encodeCharacter(int character, int charUpperValue) {
+    private static char rot13Character(int character, int charUpperValue) {
         if (character + CYPHER_CONSTANT > charUpperValue) {
             return (char) (character + CYPHER_CONSTANT - ALPHABET_LENGTH);
         } else {
