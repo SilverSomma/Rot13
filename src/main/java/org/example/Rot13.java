@@ -3,15 +3,15 @@ package org.example;
 
 public class Rot13 {
 
-    private static final int CYPHER_CONSTANT = 13;
     private static final int ALPHABET_LENGTH = 26;
-    private static final char UPPER_CASE_UPPER_VALUE = (int) 'Z';
-    private static final char LOWER_CASE_UPPER_VALUE = (int) 'z';
+    private static final int UPPER_CASE_FIRST_VALUE = 'A';
+    private static final int LOWER_CASE_FIRST_VALUE = 'a';
+    private static final int UPPER_CASE_LAST_VALUE = 'Z';
+    private static final int LOWER_CASE_LAST_VALUE = 'z';
 
     public static void main(String[] args) {
         Rot13 rot13 = new Rot13();
         rot13.rot13("ABC");
-
     }
 
     public String rot13(String original) {
@@ -20,9 +20,9 @@ public class Rot13 {
 
         for (char character : input) {
             if (isUppercase(character)) {
-                result.append(rot13Character(character, UPPER_CASE_UPPER_VALUE));
+                result.append(rot13Character(character, UPPER_CASE_LAST_VALUE));
             } else if (isLowercase(character)) {
-                result.append(rot13Character(character, LOWER_CASE_UPPER_VALUE));
+                result.append(rot13Character(character, LOWER_CASE_LAST_VALUE));
             } else {
                 result.append(character);
             }
@@ -31,26 +31,18 @@ public class Rot13 {
     }
 
     boolean isUppercase(char character) {
-        if ((int) character >= 'A' && (int) character <= UPPER_CASE_UPPER_VALUE) {
-            return true;
-        } else {
-            return false;
-        }
+        return (int) character >= UPPER_CASE_FIRST_VALUE && (int) character <= UPPER_CASE_LAST_VALUE;
     }
 
     boolean isLowercase(char character) {
-        if ((int) character >= 'a' && (int) character <= LOWER_CASE_UPPER_VALUE) {
-            return true;
-        } else {
-            return false;
-        }
+        return (int) character >= LOWER_CASE_FIRST_VALUE && (int) character <= LOWER_CASE_LAST_VALUE;
     }
 
     private static char rot13Character(int character, int charUpperValue) {
-        if (character + CYPHER_CONSTANT > charUpperValue) {
-            return (char) (character + CYPHER_CONSTANT - ALPHABET_LENGTH);
+        if (character + ALPHABET_LENGTH / 2 > charUpperValue) {
+            return (char) (character + ALPHABET_LENGTH / 2 - ALPHABET_LENGTH);
         } else {
-            return (char) (character + CYPHER_CONSTANT);
+            return (char) (character + ALPHABET_LENGTH / 2);
         }
     }
 }
