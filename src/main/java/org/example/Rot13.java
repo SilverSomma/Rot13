@@ -27,7 +27,6 @@ public class Rot13 {
                 result.append(character);
             }
         }
-        System.out.println(result.toString());
         return result.toString();
     }
 
